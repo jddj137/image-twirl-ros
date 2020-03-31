@@ -1,0 +1,12 @@
+<launch>
+
+    <!-- TODO: Add a node tag to launch image_pipeline.py node. -->
+    <!-- Hint: Review the usb_cam launch file. -->
+    <!-- <node name=[node name] pkg=[ros package name] type=[python file (.py)] output=[stdout/stderr sent to 'screen' or 'log'] /> -->
+    <node name="img_pipeline" pkg="ros_tutorials" type="img_pipeline_A.py" output="screen" > </node>
+
+    <!-- TODO: Extra credit. Add include tag to this file to launch usb_cam launch file. -->
+    <!-- Hint: https://answers.ros.org/question/266857/using-roslaunch-to-launch-ros-nodes/ -->
+    <include file="$(find ros_tutorials)/launch/usb_cam.launch"/>
+
+</launch>
