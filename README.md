@@ -1,7 +1,7 @@
 # ROS 101
 The purpose of this tutorial is achieve basic understanding of ROS nodes and their inner workings such as publishers, subscribers, console logging, and service calls. Part A explains how to download and "launch" existing ROS packages. In Part B you are challenged to write a ROS node by completing provided skeleton code.
 
-This tutorial is intended to be interactive (and is often presented in a workshop format). Complete the *TODO* after a section before continuing to the next section. Finally, solutions are contained in this tutorial - **AVOID OPENING** `image_pipeline-soln.py` and `img_pipeline-soln.launch` until the tutorial is complete.
+This tutorial is intended to be interactive (and is often presented in a workshop format). Complete the *TODO* after a section before continuing to the next section. Finally, solutions are contained in this tutorial - **AVOID OPENING** `img_pipeline-soln.py` and `img_pipeline-soln.launch` until the tutorial is complete.
 
 ## Prerequisites
 Ensure the below prerequisites are satisfied before starting the ROS 101 tutorial.
@@ -130,7 +130,7 @@ The final exercise of ROS 101: Part A is launching the Python executable `img_pi
 
 *TODO: In the ros tutorials package, open the file `usb_cam.launch` stored in the launch folder and look at the structure of the node tag.*
 
-*TODO: Open the launch file `img_pipeline-skeleton.launch` and add a node tag to launch `image_pipeline-soln.py` as a node. **Avoid opening** `image_pipeline-soln.py`!*
+*TODO: Open the launch file `img_pipeline-skeleton.launch` and add a node tag to launch `img_pipeline-soln.py` as a node. **Avoid opening** `img_pipeline-soln.py`!*
 
 *TODO: Launch both the image pipeline node and the usb cam node at the same time (using separate launch files or a single custom launch file), then use the rqt image view tool to view the processed image.*
 
@@ -204,7 +204,7 @@ At this point the tutorial moves from this README to the file `img_pipeline-skel
 *Hint: If you read through the [rospy documentation](http://wiki.ros.org/rospy/Overview) and are still stuck, look through the [Core ROS Tutorials](https://wiki.ros.org/ROS/Tutorials#Core_ROS_Tutorials).*
 
 **Once the image pipeline node is complete:**
-*TODO: Modify the launch file `img_pipeline-skeleton.launch` to launch the image_pipeline-skeleton.py node (instead of provided solution file).*
+*TODO: Modify the launch file `img_pipeline-skeleton.launch` to launch the img_pipeline-skeleton.py node (instead of provided solution file).*
 
 **BONUS: Create your own image processing pipeline**
 Beginning on line 139 are the utility functions for processing and displaying images using OpenCV. The true image processing occurs in the `process_image()` function beginning on line 176.
