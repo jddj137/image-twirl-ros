@@ -68,12 +68,12 @@ ROS packages can also be "built from source" meaning the source code is download
 
 ROS packages generally follow the structure of the ros tutorial package.
 
-**ros_tutorial package**
+**ros_img_pipe_tutorial package**
 - launch    -- Launch files for ROS package nodes.
 - src       -- Code goes here.
 - srv       -- ROS service description files.
 
-*TODO: Build the `ros_tutorial` ROS package from source.*
+*TODO: Build the `ros_img_pipe_tutorial` ROS package from source.*
 *Hint: Start by cloning the [ros tutorial](https://github.gatech.edu/Adept/adept_tutorials) GitHub repo.*
 
 ## Launching ROS Nodes
@@ -115,7 +115,7 @@ There **MUST** be a roscore running for ROS nodes to communicate. If you use `ro
 To start the roscore, open a terminal and use the command `roscore`.
 
 ## Custom ROS Launch Files
-It's possible to create launch files to launch nodes you've written, nodes from other packages, or both. For example, the completed `ros_tutorial` package launches the image pipeline node and the usb cam node from a single launch file.
+It's possible to create launch files to launch nodes you've written, nodes from other packages, or both. For example, the completed `ros_img_pipe_tutorial` package launches the image pipeline node and the usb cam node from a single launch file.
 
 Two essential tags are the <node> tag and the <param> tag.
 
