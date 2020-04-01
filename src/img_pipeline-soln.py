@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import cv2 as cv
-import ros_tutorials.srv
+import ros_img_pipe_tutorial.srv
 import rospy
 from cv_bridge import CvBridge, CvBridgeError
 from numpy import hstack
@@ -40,7 +40,7 @@ class imagePipeline():
 
         # Create Service (Server side)
         rospy.Service(
-            '/set_process_type', ros_tutorials.srv.SendString,
+            '/set_process_type', ros_img_pipe_tutorial.srv.SendString,
             self.set_process_type_handle)
 
         # Converts between ROS Image messages and OpenCV images.
