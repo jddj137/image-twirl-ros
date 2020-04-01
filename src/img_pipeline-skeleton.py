@@ -52,8 +52,8 @@ class imagePipeline():
         ''' Class Variables '''
         self.process_type = "raw"  # Default process_type allows passthrough
 
-        # TODO: Extra credit. Add a onetime rospy info message notifying user
-        # that the node is initialized.
+        # TODO (optional): Add a rospy info message notifying user that the
+        # node is initialized.
 
 
     def set_process_type_handle(self, request):
@@ -71,8 +71,8 @@ class imagePipeline():
             tuple, list, or dict
         """
         if request.data not in PROCESSING_OPTIONS:
-            # TODO: Add a periodic rospy warning every 5 seconds notifying
-            # user that an image processing type has not been selected.
+            # TODO (optional): Add a periodic rospy warning every 5 seconds
+            # notifying user that an image processing type was not selected.
             # Hint: http://wiki.ros.org/rospy/Overview/Logging
 
 
@@ -83,8 +83,9 @@ class imagePipeline():
             # Hint: http://wiki.ros.org/rospy/Overview/Services#Providing_services
 
         else:
-            # TODO: Add a periodic rospy info message every 5 seconds notifying
-            # user that an image processing type has not been selected.
+            # TODO (optional): Add a periodic rospy info message every
+            # 5 seconds notifying user that an image processing type has not
+            # been selected.
 
 
             self.process_type = request.data
@@ -116,7 +117,8 @@ class imagePipeline():
             # Converts ROS image message to OpenCV image.
             img_raw = self.bridge.imgmsg_to_cv2(img_data, "bgr8")
         except CvBridgeError as e:
-            # TODO: Add a rospy error message to log the CvBridge exception.
+            # TODO (optional): Add a rospy error message to log
+            # the CvBridge exception.
 
             return
 
@@ -128,7 +130,8 @@ class imagePipeline():
             # TODO: Publish the processed image.
 
         except CvBridgeError as e:
-            # TODO: Add a rospy error message to log the CvBridge exception.
+            # TODO (optional): Add a rospy error message to log
+            # the CvBridge exception.
 
             return
 
@@ -137,7 +140,7 @@ class imagePipeline():
 
 These could technically be placed in a seperate file for a larger project.
 """
-PROCESSING_OPTIONS = {"raw", "flip", "color", "blur", "edge", "josh"}
+PROCESSING_OPTIONS = {"raw", "flip", "color", "blur", "edge", "your-name-here"}
 
 
 def image_compare(img_a, img_b, img_c=None):
@@ -179,9 +182,6 @@ def process_image(img_raw, process_type):
         raw image > convert to gray > blur > canny edge detection
     """
 
-    if (process_type == "raw"):
-        final_img = img_raw
-
     # Modify Orientation
     if (process_type == "flip"):
         # 0, for flipping the image around the x-axis (vertical flipping).
@@ -194,7 +194,7 @@ def process_image(img_raw, process_type):
         final_img = image_compare(flipVertical, flipHorizontal, flipBoth)
 
     # Modify Color
-    if (process_type == "color"):
+    elif (process_type == "color"):
         # Switch to hue, saturation, value color mode.
         # Sometimes better for color tracking.
         hsv = cv.cvtColor(img_raw, cv.COLOR_BGR2HSV)
@@ -206,7 +206,7 @@ def process_image(img_raw, process_type):
         final_img = image_compare(img_raw, hsv, gray3)
 
     # Image Smoothing
-    if (process_type == "blur"):
+    elif (process_type == "blur"):
         # Smoothing that softens edges.
         blur = cv.blur(img_raw, (5, 5))
 
@@ -219,7 +219,7 @@ def process_image(img_raw, process_type):
         final_img = image_compare(blur, gblur, img_filter)
 
     # Edge Detection
-    if (process_type == "edge"):
+    elif (process_type == "edge"):
         # Using the canny filter to get edges.
         edges = cv.Canny(img_raw, 45, 50)
         edges3 = one_channel_to_three(edges)
@@ -231,12 +231,15 @@ def process_image(img_raw, process_type):
         final_img = image_compare(img_raw, edges3, edges_high_thresh3)
 
     # TODO: Extra credit. Make your own image processing pipeline.
-    if (process_type == ["your name here"]):
+    elif (process_type == ["your name here"]):
         img_a = 0  # placehold for a real cv function
         img_b = 0  # placehold for a real cv function
         img_c = 0  # placehold for a real cv function
 
         final_img = image_compare(img_a, img_b, img_c)
+
+    else:
+        final_img = img_raw
 
     return final_img
 
