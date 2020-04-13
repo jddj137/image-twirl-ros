@@ -74,7 +74,7 @@ ROS packages generally follow the structure of the ros tutorial package.
 - srv       -- ROS service description files.
 
 *TODO: Build the `ros_img_pipe_tutorial` ROS package from source.*
-*Hint: Start by cloning the [ros tutorial](https://github.gatech.edu/Adept/adept_tutorials) GitHub repo.*
+*Hint: Start by cloning the [ros tutorial](https://github.com/djoshuadulle/ros_img_pipe_tutorial.git) GitHub repo.*
 
 ## Launching ROS Nodes
 _def._ [ROS nodes](http://wiki.ros.org/Nodes) are the package executables performing computations and running other functions. Nodes may subscribe to inputs and publish outputs to communicate with other nodes.
