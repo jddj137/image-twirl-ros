@@ -46,7 +46,7 @@ Basic elements:
 - devel  -- `source devel/setup.bash` to overlay the workspace onto ROS environment.
 - build  -- Built binaries go here. May need to "blow this folder away" when rebuilding.
 
-*TODO: Verify that the `.bashrc` file is configured correctly.  
+*TODO: Verify that the `.bashrc` file is configured correctly.*  
 *Hint: Step 5 in prerequisites.*  
 *Hint: The `.bashrc` file is a hidden file stored in the user home directory: `~/.bashrc`.*
 
