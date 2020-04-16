@@ -46,8 +46,8 @@ Basic elements:
 - devel  -- `source devel/setup.bash` to overlay the workspace onto ROS environment.
 - build  -- Built binaries go here. May need to "blow this folder away" when rebuilding.
 
-*TODO: Verify that the `.bashrc` file is configured correctly.
-*Hint: Step 5 in prerequisites.*
+*TODO: Verify that the `.bashrc` file is configured correctly.  
+*Hint: Step 5 in prerequisites.*  
 *Hint: The `.bashrc` file is a hidden file stored in the user home directory: `~/.bashrc`.*
 
 ## ROS Software Packages
@@ -74,7 +74,7 @@ ROS packages generally follow the structure of this ros tutorial package.
 - src       -- Code goes here.
 - srv       -- ROS service description files.
 
-*TODO: Build the `ros_img_pipe_tutorial` ROS package from source.*
+*TODO: Build the `ros_img_pipe_tutorial` ROS package from source.*  
 *Hint: Start by cloning the [ros_img_pipe_tutorial](https://github.com/djoshuadulle/ros_img_pipe_tutorial.git) GitHub repo.*
 
 ## Launching ROS Nodes
@@ -105,7 +105,7 @@ To run a single node, navigate to the catkin workspace and substitute the packag
 
     rosrun [package_name] [node_name]
 
-*TODO: With the usb cam node launched, run the rqt image view tool to view the usb camera output.*
+*TODO: With the usb cam node launched, run the rqt image view tool to view the usb camera output.*  
 *Hint: Check out the "Useful Tools" section below to learn more about the rqt library.*
 
 ### roscore
@@ -135,9 +135,9 @@ The final exercise of ROS 101: Part A is launching the Python executable `img_pi
 
 *TODO: Launch both the image pipeline node and the usb cam node at the same time (using separate launch files or a single custom launch file), then use the rqt image view tool to view the processed image.*
 
-**BONUS: Process images using the image pipeline node**
-**Once the image pipeline node is running...**
-*TODO: Send a `rosservice call` via the command line to trigger image processing. Possible arguments are: "raw" [default], "flip", "color", "blur", "edge".*
+**BONUS: Process images using the image pipeline node**  
+**Once the image pipeline node is running...**  
+*TODO: Send a `rosservice call` via the command line to trigger image processing. Possible arguments are: "raw" [default], "flip", "color", "blur", "edge".*  
 *Hint: Review the documentation [rosservice](http://wiki.ros.org/rosservice) and [ROS Service Client](http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28python%29).*
 
 ## Useful Tools
@@ -146,10 +146,10 @@ _def._ `rostopic` is a command-line tool for displaying information about ROS to
 
 Some of the commonly used commands are:
 
-`rostopic list`    -- print information about active topics
-`rostopic echo`    -- print messages to screen
-`rostopic type`    -- print topic type
-`rostopic hz`    -- display publishing rate of topic
+`rostopic list`    -- print information about active topics  
+`rostopic echo`    -- print messages to screen  
+`rostopic type`    -- print topic type  
+`rostopic hz`    -- display publishing rate of topic  
 
 For full list of commands, see [rostopic command-line tool](http://wiki.ros.org/rostopic#rostopic_command-line_tool).
 
@@ -158,11 +158,11 @@ The [rqt common plugins](http://wiki.ros.org/rqt_common_plugins) library provide
 
 Some of the commonly used commands are:
 
-`rosrun rqt_image_view rqt_image_view`     -- GUI plugin for displaying images
-`rosrun rqt_reconfigure rqt_reconfigure`    -- view and edit parameters accessible via dynamic_reconfigure
-`rosrun rqt_topic rqt_topic`    -- GUI plugin for displaying debug information about ROS topics
-`rosrun rqt_logger_level rqt_logger_level`    -- GUI plugin for configuring the logger level of ROS nodes
-`rosrun rqt_graph rqt_graph`    -- GUI plugin for visualizing the ROS computation graph
+`rosrun rqt_image_view rqt_image_view`     -- GUI plugin for displaying images  
+`rosrun rqt_reconfigure rqt_reconfigure`    -- view and edit parameters accessible via dynamic_reconfigure  
+`rosrun rqt_topic rqt_topic`    -- GUI plugin for displaying debug information about ROS topics  
+`rosrun rqt_logger_level rqt_logger_level`    -- GUI plugin for configuring the logger level of ROS nodes  
+`rosrun rqt_graph rqt_graph`    -- GUI plugin for visualizing the ROS computation graph  
 
 To run any rqt plugin, type in a single command `rqt`, then select any plugins you want from the GUI that launches afterwards.
 
@@ -198,23 +198,23 @@ Also recall that a node may be debugged by launching the node with `rosrun`, bec
 ## Creating a Custom ROS Node
 At this point the tutorial moves from this README to the file `img_pipeline-skeleton.py`. This file contains the framework for the image processing node launched at the end of ROS 101: Part A and will function similarly when completed. Read through the code comments from top to bottom and complete the *TODO*s embedded in the code (details below), then return to this README for the final two *TODO*s.
 
-**Complete the image pipeline node:**
+**Complete the image pipeline node:**  
 *TODO: Complete the `img_pipeline-skeleton.py` node to process input from the usb cam node, and output the post-processed image.*
 - The *TODO*s related to publishing, subscribing, and service calls at lines 31, 36, 82, & 129 are required.
 - The *TODO*s related to logging at lines 55, 74, 86, 120, & 132 are optional.
 
 *Hint: If you read through the [rospy documentation](http://wiki.ros.org/rospy/Overview) and are still stuck, look through the [Core ROS Tutorials](https://wiki.ros.org/ROS/Tutorials#Core_ROS_Tutorials).*
 
-**Once the image pipeline node is complete:**
+**Once the image pipeline node is complete:**  
 *TODO: Modify the launch file `img_pipeline-skeleton.launch` to launch the img_pipeline-skeleton.py node (instead of the provided solution file).*
 
-**BONUS: Create your own image processing pipeline**
+**BONUS: Create your own image processing pipeline**  
 Beginning on line 139 are the utility functions for processing and displaying images using OpenCV. The true image processing occurs in the `process_image()` function beginning on line 176.
 
-**Once you're familiar with the image processing options...**
+**Once you're familiar with the image processing options...**  
 *TODO: Make your own image processing pipeline by completing the processing template on lines 234-239. Be sure to add your option to the PROCESSING_OPTIONS on line 143.*
 
-*TODO: Send a `rosservice call` via the command line to trigger your custom image processing pipeline.*
+*TODO: Send a `rosservice call` via the command line to trigger your custom image processing pipeline.*  
 *Hint: Review the [rosservice](http://wiki.ros.org/rosservice) documentation.*
 
 # Additional Resources
