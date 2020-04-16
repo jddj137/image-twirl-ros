@@ -1,7 +1,7 @@
 # ROS 101
 The purpose of this tutorial is achieve basic understanding of ROS nodes and their inner workings such as publishers, subscribers, console logging, and service calls. Part A explains how to download and "launch" existing ROS packages. In Part B you are challenged to write a ROS node by completing provided skeleton code.
 
-This tutorial is intended to be interactive (and is often presented in a workshop format). Complete the *TODO* after a section before continuing to the next section. Finally, solutions are contained in this tutorial - **AVOID OPENING** `img_pipeline-soln.py` and `img_pipeline-soln.launch` until the tutorial is complete.
+This tutorial is intended to be interactive (and is often presented in a workshop format). Complete the *TODO*s after a section before continuing to the next section. Finally, solutions are contained in this tutorial - **AVOID OPENING** `img_pipeline-soln.py` and `img_pipeline-soln.launch` until the tutorial is complete.
 
 ## Prerequisites
 Ensure the below prerequisites are satisfied before starting the ROS 101 tutorial.
@@ -11,7 +11,7 @@ Ensure the below prerequisites are satisfied before starting the ROS 101 tutoria
  - Check this tutorial to [Install Ubuntu Desktop](https://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop#0) on a real machine. If dual-booting, you may need to read about partitioning your system.
  - This guide explains how to [Run Ubuntu Within Windows Using VirtualBox](https://www.lifewire.com/run-ubuntu-within-windows-virtualbox-2202098). If using macOS, the process is very similar.
 
- **Note:** Ubuntu 16 is OK for ROS 101 training, but if installing for the first time, choose Ubuntu 18!
+    **Note:** Ubuntu 16 is OK for ROS 101 training, but if installing for the first time, choose Ubuntu 18!
 
 3. Install ROS on your new Linux machine: [ROS Installation Instructions](http://wiki.ros.org/ROS/Installation)
   - Follow the installation directions, steps 1.1 through 1.7.
@@ -25,7 +25,7 @@ Ensure the below prerequisites are satisfied before starting the ROS 101 tutoria
     `source /opt/ros/<distro>/setup.bash`
 - This file is located in the home directory: `~/.bashrc`
 
-**Note:** You **MUST** source the ROS environment in the terminal shell for ROS to function properly. Sometimes it may appear ROS is "broken", but usually this is caused by files changing slightly and the new environment not being imported.
+    **Note:** You **MUST** source the ROS environment in the terminal shell for ROS to function properly. Sometimes it may appear ROS is "broken", but usually this is caused by files changing slightly and the new environment not being imported.
 
 # ROS 101: Part A
 Part A outlines basic ROS structure and explains how to download and "launch" existing ROS packages. The section *TODO*s can be completed using the terminal shell, i.e. command line, and a text editor. By the end you will be able to write your own launch file to launch pre-built or custom ROS packages.
@@ -46,7 +46,8 @@ Basic elements:
 - devel  -- `source devel/setup.bash` to overlay the workspace onto ROS environment.
 - build  -- Built binaries go here. May need to "blow this folder away" when rebuilding.
 
-*TODO: Verify that the `.bashrc` file is configured correctly.*
+*TODO: Verify that the `.bashrc` file is configured correctly.
+*Hint: Step 5 in prerequisites.*
 *Hint: The `.bashrc` file is a hidden file stored in the user home directory: `~/.bashrc`.*
 
 ## ROS Software Packages
@@ -63,10 +64,10 @@ Many ROS packages are pre-built and bundled for software release as debian packa
 ROS packages can also be "built from source" meaning the source code is downloaded (usually by cloning a repo), then compiled and built locally. This method allows for development of new ROS packages and installing ROS packages without pre-built debian packages. To build ROS packages from source, navigate to `catkin_ws/src` and use the following commands.
 
     git clone [repo_address]
-    cd ../..
+    cd ..
     catkin_make
 
-ROS packages generally follow the structure of the ros tutorial package.
+ROS packages generally follow the structure of this ros tutorial package.
 
 **ros_img_pipe_tutorial package**
 - launch    -- Launch files for ROS package nodes.
@@ -74,7 +75,7 @@ ROS packages generally follow the structure of the ros tutorial package.
 - srv       -- ROS service description files.
 
 *TODO: Build the `ros_img_pipe_tutorial` ROS package from source.*
-*Hint: Start by cloning the [ros tutorial](https://github.com/djoshuadulle/ros_img_pipe_tutorial.git) GitHub repo.*
+*Hint: Start by cloning the [ros_img_pipe_tutorial](https://github.com/djoshuadulle/ros_img_pipe_tutorial.git) GitHub repo.*
 
 ## Launching ROS Nodes
 _def._ [ROS nodes](http://wiki.ros.org/Nodes) are the package executables performing computations and running other functions. Nodes may subscribe to inputs and publish outputs to communicate with other nodes.
@@ -84,7 +85,7 @@ _def._ Launch files are [roslaunch XML](http://wiki.ros.org/roslaunch/XML) files
 
 "Launching a node" means calling the ROS package launch file from the command line using the `roslaunch` command.
 
-To start the nodes specified in a launch file, navigate to the catkin workspace and substitute the package name and filename into the following command.
+To start the nodes specified in a launch file, navigate to the catkin workspace and substitute the package name containing the file and filename into the following command.
 
     roslaunch [package_name] [filename].launch
 
@@ -128,7 +129,7 @@ For full tag descriptions and their usage, see the [roslaunch tag reference](htt
 ## Create Your Own ROS Launch File
 The final exercise of ROS 101: Part A is launching the Python executable `img_pipeline-soln.py`. This node subscribes to a raw camera image topic, passes the raw image through an OpenCV image processing pipeline, and publishes the modified image to the processed image topic. By default the node simply passes the raw image through without modification, but different OpenCV image processing functions may be triggered using a rosservice call (see the bonus).
 
-*TODO: In the ros tutorials package, open the file `usb_cam.launch` stored in the launch folder and look at the structure of the node tag.*
+*TODO: In the ros_img_pipe_tutorial package, open the file `usb_cam.launch` stored in the launch folder and look at the structure of the node tag.*
 
 *TODO: Open the launch file `img_pipeline-skeleton.launch` and add a node tag to launch `img_pipeline-soln.py` as a node. **Avoid opening** `img_pipeline-soln.py`!*
 
@@ -195,8 +196,9 @@ Also recall that a node may be debugged by launching the node with `rosrun`, bec
     rosrun [package_name] [node_name]
 
 ## Creating a Custom ROS Node
-At this point the tutorial moves from this README to the file `img_pipeline-skeleton.py`. This file contains the framework for the image processing node launched at the end of ROS 101: Part A and will function similarly when completed. Read through the code comments from top to bottom and complete the *TODO*s embedded in the code, then return to this README for the final two *TODO*s.
+At this point the tutorial moves from this README to the file `img_pipeline-skeleton.py`. This file contains the framework for the image processing node launched at the end of ROS 101: Part A and will function similarly when completed. Read through the code comments from top to bottom and complete the *TODO*s embedded in the code (details below), then return to this README for the final two *TODO*s.
 
+**Complete the image pipeline node:**
 *TODO: Complete the `img_pipeline-skeleton.py` node to process input from the usb cam node, and output the post-processed image.*
 - The *TODO*s related to publishing, subscribing, and service calls at lines 31, 36, 82, & 129 are required.
 - The *TODO*s related to logging at lines 55, 74, 86, 120, & 132 are optional.
@@ -204,7 +206,7 @@ At this point the tutorial moves from this README to the file `img_pipeline-skel
 *Hint: If you read through the [rospy documentation](http://wiki.ros.org/rospy/Overview) and are still stuck, look through the [Core ROS Tutorials](https://wiki.ros.org/ROS/Tutorials#Core_ROS_Tutorials).*
 
 **Once the image pipeline node is complete:**
-*TODO: Modify the launch file `img_pipeline-skeleton.launch` to launch the img_pipeline-skeleton.py node (instead of provided solution file).*
+*TODO: Modify the launch file `img_pipeline-skeleton.launch` to launch the img_pipeline-skeleton.py node (instead of the provided solution file).*
 
 **BONUS: Create your own image processing pipeline**
 Beginning on line 139 are the utility functions for processing and displaying images using OpenCV. The true image processing occurs in the `process_image()` function beginning on line 176.
