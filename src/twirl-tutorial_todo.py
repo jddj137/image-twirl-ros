@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
 import cv2 as cv
-import ros_img_pipe_tutorial.srv
+import image_twirl_ros.srv
 import rospy
 from cv_bridge import CvBridge, CvBridgeError
 from numpy import hstack
 from sensor_msgs.msg import Image
 
 
-class imagePipeline():
+class imageTwirlTutorial():
 
     def __init__(self):
         """ Creates an instance of the ROS node.
@@ -40,7 +40,7 @@ class imagePipeline():
 
         # Create Service (Server side)
         rospy.Service(
-            '/set_process_type', ros_img_pipe_tutorial.srv.SendString,
+            '/set_process_type', image_twirl_ros.srv.SendString,
             self.set_process_type_handle)
 
         # Converts between ROS Image messages and OpenCV images.
@@ -252,7 +252,7 @@ def process_image(img_raw, process_type):
 
 
 if __name__ == '__main__':
-    node = imagePipeline()
+    node = imageTwirlTutorial()
     try:
         rospy.spin()
     except KeyboardInterrupt:  # Press Ctrl+c on keyboard to exit.

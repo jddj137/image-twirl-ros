@@ -1,12 +1,12 @@
 <launch>
 
-    <!-- TODO: Add a node tag to launch img_pipeline.py node. -->
+    <!-- TODO: Add a node tag to launch twirl-tutorial node. -->
     <!-- Hint: Review the usb_cam launch file. -->
     <!-- <node name=[node name] pkg=[ros package name] type=[executable] output=[stdout/stderr sent to 'screen' or 'log'] /> -->
-    <node name="img_pipeline" pkg="ros_img_pipe_tutorial" type="img_pipeline-soln.py" output="screen" > </node>
+    <node name="twirl-tutorial" pkg="image_twirl_ros" type="twirl-tutorial_soln.py" output="screen" > </node>
 
     <!-- TODO: Extra credit. Add include tag to this file to launch usb_cam launch file. -->
     <!-- Hint: https://answers.ros.org/question/266857/using-roslaunch-to-launch-ros-nodes/ -->
-    <include file="$(find ros_img_pipe_tutorial)/launch/usb_cam.launch"/>
+    <include file="$(find image_twirl_ros)/launch/usb_cam.launch"/>
 
 </launch>

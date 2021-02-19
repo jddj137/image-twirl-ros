@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>ros_img_pipe_tutorial</name>
+  <name>image_twirl_ros</name>
   <version>0.1.0</version>
   <description>A basic tutorial demonstrating ROS nodes and OpenCV image processing.</description>
 
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/ros_img_pipe_tutorial</url> -->
+  <!-- <url type="website">http://wiki.ros.org/image_twirl_ros</url> -->
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->
