@@ -1,0 +1,38 @@
+%YAML:1.0
+
+# Modify Orientation
+# flip_x - flip the image around the x-axis (vertical flipping)
+# flip_y - flip around the y-axis (horizontal flipping)
+# flip_xy - flip around both axes
+
+# Modify Color
+# bgr2hsv - Switch to hue, saturation, value color mode.
+# bgr2gray - Converting the image to grayscale.
+
+# Image Smoothing
+# blur - Smoothing that softens edges.
+# gaussianBlur - Gaussian filtering is highly effective in removing noise from image.
+# bilateralFilter - Smoothing without removing edges.
+
+twirl: [flip_y, bgr2gray, bilateralFilter]
+
+# Blur kernel size (width, height); can differ but both must be positive and odd.
+blur.kernalSize: [5, 5]
+
+# Gaussian kernel size (width, height); can differ but both must be positive and odd.
+gaussianBlur.kernalSize: [3, 3]
+# Gaussian kernel standard deviation in X direction.
+gaussianBlur.sigmaX: 0
+# Gaussian kernel standard deviation in Y direction.
+gaussianBlur.sigmaY: 0
+
+# Diameter of each pixel neighborhood used during filtering.
+bilateralFilter.diameter: 5
+# Filter sigma in the color space. Larger parameter value means farther colors w/in the
+# pixel neighborhood will be mixed together, resulting in larger areas of semi-equal color.
+bilateralFilter.sigmaColor: 50
+# Filter sigma in the coordinate space. Larger parameter value means that farther
+# pixels influence each other as long as their colors are close enough.
+# When d > 0, it specifies the neighborhood size regardless of sigmaSpace.
+# Otherwise, d is proportional to sigmaSpace.
+bilateralFilter.sigmaSpace: 50
