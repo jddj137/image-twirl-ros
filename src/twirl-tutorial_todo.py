@@ -94,7 +94,7 @@ class imageTwirlTutorial():
             return {'success': True}
 
     def camera_callback(self, img_data):
-        """ Function to call when data is received from the camera image topic.
+        """ Function called when data is received from the camera image topic.
 
         ROS callback functions are generally message handlers assigned to topic
         subscriptions. When a message arrives, ROS passes the new message data
