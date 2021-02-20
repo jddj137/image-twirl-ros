@@ -10,8 +10,7 @@ from sensor_msgs.msg import Image
 class imageTwirlRos():
 
     def __init__(self):
-        """
-        Creates an instance of the ROS node.
+        """ Creates an instance of the ROS node.
         """
         self.twirl_config_filepath = rospy.get_param('~twirl_config_filepath')
         self.twirler = imageTwirl(self.twirl_config_filepath)

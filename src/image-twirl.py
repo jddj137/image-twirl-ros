@@ -39,6 +39,30 @@ class imageTwirl():
 
         return three_chan_img
 
+    def apply_brightness_contrast(self, img_in, brightness=0, contrast=0):
+        if brightness != 0:
+            if brightness > 0:
+                shadow = brightness
+                highlight = 255
+            else:
+                shadow = 0
+                highlight = 255 + brightness
+            alpha_b = (highlight - shadow)/255
+            gamma_b = shadow
+
+            buf = cv.addWeighted(img_in, alpha_b, img_in, 0, gamma_b)
+        else:
+            buf = img_in.copy()
+
+        if contrast != 0:
+            f = 131*(contrast + 127)/(127*(131-contrast))
+            alpha_c = f
+            gamma_c = 127*(1-f)
+
+            buf = cv.addWeighted(buf, alpha_c, buf, 0, gamma_c)
+
+        return buf
+
     def execute_twirl(self, img_in):
         # Load twirl from twirl-config.yaml file.
         file = cv.FileStorage(self.filepath, cv.FileStorage_READ)
@@ -124,6 +148,16 @@ class imageTwirl():
 
             img_out = cv.bilateralFilter(img_in, diameter, sigmaClr, sigmaSpc)
 
+        elif (img_process == "brightness"):
+            brightness = int(file.getNode('brightness').real())
+
+            img_out = self.apply_brightness_contrast(img_in, brightness, 0)
+
+        elif (img_process == "contrast"):
+            contrast = int(file.getNode('contrast').real())
+
+            img_out = self.apply_brightness_contrast(img_in, 0, contrast)
+
         else:
             print("Twirl operation not found.")
             img_out = img_in
@@ -162,5 +196,5 @@ def test_twirl_config_update():
 
 
 if __name__ == "__main__":
-    test_twirl()
+    # test_twirl()
     test_twirl_config_update()
