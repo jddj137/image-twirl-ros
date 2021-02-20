@@ -1,20 +1,17 @@
 #!/usr/bin/env python
 
 import cv2 as cv
-import image_twirl_ros.srv
-import rospy
-from cv_bridge import CvBridge, CvBridgeError
+import sys
+
 from numpy import hstack
-from sensor_msgs.msg import Image
 
 
 class imageTwirl():
-    def __init__(self):
-        self.pipeline = {"raw", "flip", "color", "blur", "edge", "your-name-here"}
-
+    def __init__(self, filepath):
+        self.filepath = filepath
         return
 
-    def image_compare(img_a, img_b, img_c=None):
+    def image_compare(self, img_a, img_b, img_c=None):
         # Stacking the images to print them together for comparison.
         if (img_c is None):
             img_compare = hstack((img_a, img_b))
@@ -23,7 +20,7 @@ class imageTwirl():
 
         return img_compare
 
-    def one_channel_to_three(one_chan_img):
+    def one_channel_to_three(self, one_chan_img):
         """ Transforms an image with one channel into image with three channels.
 
         When OpenCV performs a transform to gray scale or edge detection,
@@ -42,73 +39,128 @@ class imageTwirl():
 
         return three_chan_img
 
+    def execute_twirl(self, img_in):
+        # Load twirl from twirl-config.yaml file.
+        file = cv.FileStorage(self.filepath, cv.FileStorage_READ)
 
-def process_image(img_raw, process_type):
-    """ Set of functions used to process images.
+        if (not file.isOpened()):
+            print('Failed to open ', self.filepath, file=sys.stderr)
+            exit(1)
 
-    Below are a variety of useful operations to modify images. When
-    combined, these operations form pipelines for pre or post-processing.
-    A common image processing pipeline is:
-        raw image > convert to gray > blur > canny edge detection
-    """
+        img_twirl = file.getNode('twirl')
 
-    # Modify Orientation
-    if (process_type == "flip"):
-        # 0, for flipping the image around the x-axis (vertical flipping).
-        flipVertical = cv.flip(img_raw, 0)
-        # > 0 for flipping around the y-axis (horizontal flipping).
-        flipHorizontal = cv.flip(img_raw, 1)
-        # < 0 for flipping around both axes.
-        flipBoth = cv.flip(img_raw, -1)
+        tmp_img = img_in
 
-        final_img = image_compare(flipVertical, flipHorizontal, flipBoth)
+        for i in range(img_twirl.size()):
+            img_process = img_twirl.at(i).string()
+            tmp_img = self.process_image(tmp_img, img_process)
 
-    # Modify Color
-    elif (process_type == "color"):
-        # Switch to hue, saturation, value color mode.
-        # Sometimes better for color tracking.
-        hsv = cv.cvtColor(img_raw, cv.COLOR_BGR2HSV)
+        img_out = tmp_img
+        return img_out
 
-        # Converting the image to grayscale.
-        gray = cv.cvtColor(img_raw, cv.COLOR_BGR2GRAY)
-        gray3 = one_channel_to_three(gray)
+    def process_image(self, img_in, img_process):
+        """ Set of functions used to process images.
 
-        final_img = image_compare(img_raw, hsv, gray3)
+        Below are a variety of useful operations to modify images. When
+        combined, these operations form pipelines for pre or post-processing.
+        A common image processing pipeline is:
+            raw image > convert to gray > blur > canny edge detection
+        """
 
-    # Image Smoothing
-    elif (process_type == "blur"):
-        # Smoothing that softens edges.
-        blur = cv.blur(img_raw, (5, 5))
+        # Read from twirl-config.yaml file.
+        file = cv.FileStorage(self.filepath, cv.FileStorage_READ)
 
-        # Gaussian filtering is highly effective in removing noise from image.
-        gblur = cv.GaussianBlur(img_raw, (25, 25), 0)
+        if (not file.isOpened()):
+            print('Failed to open ', self.filepath, file=sys.stderr)
+            exit(1)
 
-        # Smoothing without removing edges.
-        img_filter = cv.bilateralFilter(img_raw, 5, 50, 50)
+        # Modify Orientation
+        if (img_process == "flip_x"):
+            # 0, for flipping the image around the x-axis (vertical flipping).
+            img_out = cv.flip(img_in, 0)
 
-        final_img = image_compare(blur, gblur, img_filter)
+        elif (img_process == "flip_y"):
+            # > 0 for flipping around the y-axis (horizontal flipping).
+            img_out = cv.flip(img_in, 1)
 
-    # Edge Detection
-    elif (process_type == "edge"):
-        # Using the canny filter to get edges.
-        edges = cv.Canny(img_raw, 45, 50)
-        edges3 = one_channel_to_three(edges)
+        elif (img_process == "flip_xy"):
+            # < 0 for flipping around both axes.
+            img_out = cv.flip(img_in, -1)
 
-        # Using the canny filter with different params for higher sensitivity.
-        edges_high_thresh = cv.Canny(img_raw, 100, 200)
-        edges_high_thresh3 = one_channel_to_three(edges_high_thresh)
+        # Modify Color
+        elif (img_process == "bgr2hsv"):
+            # Switch to hue, saturation, value color mode.
+            # Sometimes better for color tracking.
+            img_out = cv.cvtColor(img_in, cv.COLOR_BGR2HSV)
 
-        final_img = image_compare(img_raw, edges3, edges_high_thresh3)
+        elif (img_process == "bgr2gray"):
+            # Converting the image to grayscale.
+            gray = cv.cvtColor(img_in, cv.COLOR_BGR2GRAY)
+            img_out = self.one_channel_to_three(gray)
 
-    # TODO: Extra credit. Make your own image processing pipeline.
-    elif (process_type == ["your name here"]):
-        img_a = 0  # placehold for a real cv function
-        img_b = 0  # placehold for a real cv function
-        img_c = 0  # placehold for a real cv function
+        # Image Smoothing
+        elif (img_process == "blur"):
+            # Smoothing that softens edges.
+            kSize = file.getNode('blur.kernalSize')
+            (w, h) = int(kSize.at(0).real()), int(kSize.at(1).real())
 
-        final_img = image_compare(img_a, img_b, img_c)
+            img_out = cv.blur(img_in, (w, h))
 
-    else:
-        final_img = img_raw
+        elif (img_process == "gaussianBlur"):
+            # Gaussian filtering is highly effective in removing noise.
+            kSize = file.getNode('gaussianBlur.kernalSize')
+            (w, h) = int(kSize.at(0).real()), int(kSize.at(1).real())
 
-    return final_img
+            sigmaX = file.getNode('gaussianBlur.sigmaX').real()
+            sigmaY = file.getNode('gaussianBlur.sigmaY').real()
+
+            img_out = cv.GaussianBlur(img_in, (w, h), sigmaX, sigmaY)
+
+        elif (img_process == "bilateralFilter"):
+            # Smoothing without removing edges.
+            diameter = int(file.getNode('bilateralFilter.diameter').real())
+            sigmaClr = file.getNode('bilateralFilter.sigmaColor').real()
+            sigmaSpc = file.getNode('bilateralFilter.sigmaSpace').real()
+
+            img_out = cv.bilateralFilter(img_in, diameter, sigmaClr, sigmaSpc)
+
+        else:
+            print("Twirl operation not found.")
+            img_out = img_in
+
+        return img_out
+
+
+def test_twirl():
+    filepath = "/Users/josh/repos/image_twirl_ros/launch/twirl-config.yaml"
+    img = "/Users/josh/repos/image_twirl_ros/test/rick-morty.jpg"
+    twirler = imageTwirl(filepath)
+    img_in = cv.imread(img)
+    img_twirl = twirler.execute_twirl(img_in)
+
+    cv.imshow('Image Twirl', img_twirl)
+
+    k = cv.waitKey(0)
+    if k == 27:         # wait for ESC key to exit
+        cv.destroyAllWindows()
+
+
+def test_twirl_config_update():
+    while(1):
+        filepath = "/Users/josh/repos/image_twirl_ros/launch/twirl-config.yaml"
+        img = "/Users/josh/repos/image_twirl_ros/test/rick-morty.jpg"
+        twirler = imageTwirl(filepath)
+        img_in = cv.imread(img)
+        img_twirl = twirler.execute_twirl(img_in)
+
+        cv.imshow('Image Twirl', img_twirl)
+
+        k = cv.waitKey(1000)
+        if k == 27:         # wait for ESC key to exit
+            cv.destroyAllWindows()
+            break
+
+
+if __name__ == "__main__":
+    test_twirl()
+    test_twirl_config_update()
