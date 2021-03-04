@@ -14,7 +14,11 @@
 # gaussianBlur - Gaussian filtering is highly effective in removing noise from image.
 # bilateralFilter - Smoothing without removing edges.
 
-twirl: [flip_y, bgr2gray, bilateralFilter]
+# Brightness and Contrast
+# brightness -  measure of luminous intensity
+# contrast - amount of color differentiation that exists between various image features
+
+twirl: [flip_y, bilateralFilter, contrast]
 
 # Blur kernel size (width, height); can differ but both must be positive and odd.
 blur.kernalSize: [5, 5]
@@ -36,3 +40,6 @@ bilateralFilter.sigmaColor: 50
 # When d > 0, it specifies the neighborhood size regardless of sigmaSpace.
 # Otherwise, d is proportional to sigmaSpace.
 bilateralFilter.sigmaSpace: 50
+
+brightness: 0
+contrast: 0
