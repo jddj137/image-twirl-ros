@@ -4,7 +4,7 @@
 
     <!-- DECLARE PARAMS -->
     <arg name="twirl_config_filepath" default='$(find image_twirl_ros)/launch/twirl_config.yaml' />
-    <arg name="image_input_topic" default='/usb_cam/image_raw' />
+    <arg name="image_input_topic" default='/camera/image_raw' />
     <arg name="image_output_topic" default='/twirled_image' />
 
     <!-- LAUNCH NODES -->

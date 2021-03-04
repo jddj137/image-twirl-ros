@@ -18,7 +18,7 @@
 # brightness -  measure of luminous intensity
 # contrast - amount of color differentiation that exists between various image features
 
-twirl: [flip_y, bgr2hsv, bilateralFilter, contrast]
+twirl: [contrast, bilateralFilter]
 
 # Blur kernel size (width, height); can differ but both must be positive and odd.
 blur.kernalSize: [5, 5]
@@ -42,4 +42,4 @@ bilateralFilter.sigmaColor: 50
 bilateralFilter.sigmaSpace: 50
 
 brightness: 0
-contrast: 0
+contrast: 35
