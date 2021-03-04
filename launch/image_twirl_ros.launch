@@ -3,12 +3,12 @@
 <launch>
 
     <!-- DECLARE PARAMS -->
-    <arg name="twirl_config_filepath" default='$(find image_twirl_ros)/launch/twirl-config.yaml' />
+    <arg name="twirl_config_filepath" default='$(find image_twirl_ros)/launch/twirl_config.yaml' />
     <arg name="image_input_topic" default='/usb_cam/image_raw' />
     <arg name="image_output_topic" default='/twirled_image' />
 
     <!-- LAUNCH NODES -->
-    <node name="image_twirl" pkg="image_twirl_ros" type="image-twirl-ros.py" output="screen" >
+    <node name="image_twirl" pkg="image_twirl_ros" type="image_twirl_ros.py" output="screen" >
         <param name="twirl_config_filepath" type="string" value="$(arg twirl_config_filepath)" />
         <param name="image_input_topic" type="string" value="$(arg image_input_topic)" />
         <param name="image_output_topic" type="string" value="$(arg image_output_topic)" />

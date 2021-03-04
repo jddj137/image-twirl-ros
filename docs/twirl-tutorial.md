@@ -3,7 +3,7 @@ The purpose of this tutorial is achieve basic understanding of ROS nodes and the
 - Part A explains how to download and "launch" existing ROS packages.
 - Part B you are challenged to write a ROS node by completing provided skeleton code.
 
-This tutorial is intended to be interactive (and is often presented in a workshop format). Complete the *TODO*s after a section before continuing to the next section. Solutions are contained in this tutorial - **AVOID OPENING** `twirl-tutorial_soln.py` and `twirl-tutorial_soln.launch` until the tutorial is complete.
+This tutorial is intended to be interactive (and is often presented in a workshop format). Complete the *TODO*s after a section before continuing to the next section. Solutions are contained in this tutorial - **AVOID OPENING** `twirl_tutorial_soln.py` and `twirl_tutorial_soln.launch` until the tutorial is complete.
 
 ## Prerequisites
 Ensure the prerequisites are satisfied before starting the Image Twirl Tutorial (found in README.md).
@@ -109,11 +109,11 @@ The optional [param tag](https://wiki.ros.org/roslaunch/XML/param) defines param
 For full tag descriptions and their usage, see the [roslaunch tag reference](http://wiki.ros.org/roslaunch/XML#Tag_Reference).
 
 ## Create Your Own ROS Launch File
-The final exercise of Part A is launching the Python executable `twirl-tutorial_soln.py`. This node subscribes to a raw camera image topic, passes the raw image through an OpenCV image processing pipeline, and publishes the modified image to the processed image topic. By default the node simply passes the raw image through without modification, but different OpenCV image processing functions may be triggered using a rosservice call (see the bonus).
+The final exercise of Part A is launching the Python executable `twirl_tutorial_soln.py`. This node subscribes to a raw camera image topic, passes the raw image through an OpenCV image processing pipeline, and publishes the modified image to the processed image topic. By default the node simply passes the raw image through without modification, but different OpenCV image processing functions may be triggered using a rosservice call (see the bonus).
 
 *TODO: In the image_twirl_ros package, open the file `usb_cam.launch` stored in the launch folder and look at the structure of the node tag.*
 
-*TODO: Open the launch file `twirl-tutorial_todo.launch` and add a node tag to launch `twirl-tutorial_soln.py` as a node. **Avoid opening** `twirl-tutorial_soln.py`!*
+*TODO: Open the launch file `twirl_tutorial_todo.launch` and add a node tag to launch `twirl_tutorial_soln.py` as a node. **Avoid opening** `twirl_tutorial_soln.py`!*
 
 *TODO: Launch both the image pipeline node and the usb cam node at the same time (using separate launch files or a single custom launch file), then use the rqt image view tool to view the processed image.*
 
@@ -153,17 +153,17 @@ Also recall that a node may be debugged by launching the node with `rosrun`, bec
     rosrun [package_name] [node_name]
 
 ## Creating a Custom ROS Node
-At this point the tutorial moves from this README to the file `twirl-tutorial_todo.py`. This file contains the framework for the image processing node launched at the end of Part A and will function similarly when completed. Read through the code comments from top to bottom and complete the *TODO*s embedded in the code (details below), then return to this README for the final two *TODO*s.
+At this point the tutorial moves from this README to the file `twirl_tutorial_todo.py`. This file contains the framework for the image processing node launched at the end of Part A and will function similarly when completed. Read through the code comments from top to bottom and complete the *TODO*s embedded in the code (details below), then return to this README for the final two *TODO*s.
 
 **Complete the image pipeline node:**  
-*TODO: Complete the `twirl-tutorial_todo.py` node to process input from the usb cam node, and output the post-processed image.*
+*TODO: Complete the `twirl_tutorial_todo.py` node to process input from the usb cam node, and output the post-processed image.*
 - The *TODO*s related to publishing, subscribing, and service calls at lines 31, 36, 82, & 129 are required.
 - The *TODO*s related to logging at lines 55, 74, 86, 120, & 132 are optional.
 
 *Hint: If you read through the [rospy documentation](http://wiki.ros.org/rospy/Overview) and are still stuck, look through the [Core ROS Tutorials](https://wiki.ros.org/ROS/Tutorials#Core_ROS_Tutorials).*
 
 **Once the image pipeline node is complete:**  
-*TODO: Modify the launch file `twirl-tutorial_todo.launch` to launch the twirl-tutorial_todo.py node (instead of the provided solution file).*
+*TODO: Modify the launch file `twirl_tutorial_todo.launch` to launch the twirl_tutorial_todo.py node (instead of the provided solution file).*
 
 **BONUS: Create your own image processing pipeline**  
 Beginning on line 139 are the utility functions for processing and displaying images using OpenCV. The true image processing occurs in the `process_image()` function beginning on line 176.

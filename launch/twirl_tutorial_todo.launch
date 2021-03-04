@@ -1,6 +1,6 @@
 <launch>
 
-    <!-- TODO: Add a node tag to launch twirl-tutorial node. -->
+    <!-- TODO: Add a node tag to launch twirl_tutorial node. -->
     <!-- Hint: Review the usb_cam launch file. -->
 
     <!-- TODO: Extra credit. Add include tag to this file to launch usb_cam launch file. -->

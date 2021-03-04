@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import rospy
-import imageTwirl
+from image_twirl import imageTwirl
 
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
@@ -12,10 +12,10 @@ class imageTwirlRos():
     def __init__(self):
         """ Creates an instance of the ROS node.
         """
+        rospy.init_node('image_twirl')
+
         self.twirl_config_filepath = rospy.get_param('~twirl_config_filepath')
         self.twirler = imageTwirl(self.twirl_config_filepath)
-
-        rospy.init_node('image_twirl')
 
         # Setup the publisher and subscriber.
         sub_topic = rospy.get_param('~image_input_topic')

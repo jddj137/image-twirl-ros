@@ -68,8 +68,9 @@ class imageTwirl():
         file = cv.FileStorage(self.filepath, cv.FileStorage_READ)
 
         if (not file.isOpened()):
-            print('Failed to open ', self.filepath, file=sys.stderr)
-            exit(1)
+            print('Failed to open ', self.filepath)
+            # exit(1)
+            return
 
         img_twirl = file.getNode('twirl')
 
@@ -95,7 +96,7 @@ class imageTwirl():
         file = cv.FileStorage(self.filepath, cv.FileStorage_READ)
 
         if (not file.isOpened()):
-            print('Failed to open ', self.filepath, file=sys.stderr)
+            print('Failed to open ', self.filepath)
             exit(1)
 
         # Modify Orientation
